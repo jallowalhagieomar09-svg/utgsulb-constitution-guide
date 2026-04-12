@@ -15,7 +15,7 @@ const Chapter4Page = () => {
         provisions={[
           "(1) There shall be the Students' Legislative Body which shall be the legislative arm of the Union.",
           "(2) The Legislative Body shall be composed of representatives from each school/faculty-based sub-association.",
-          "(3) Each school/faculty shall be represented by three (3) members.",
+          "(3) Each school/faculty shall be represented by one (1) member.",
           "(4) Members are recommended by their sub-associations and approved by Congress.",
           "(5) Members serve for one academic year.",
           "(6) A candidate must submit a nomination form with signatures of at least 30 students from their school/faculty.",
@@ -25,7 +25,7 @@ const Chapter4Page = () => {
           "(10) Selection must be done in utmost good faith based on experience and competence.",
           "(11) Candidates must have at least 2 semesters left for study."
         ]}
-        interpretation="The Legislative Body is the Union's parliament. Each faculty/school sends 3 representatives, ensuring proportional representation across the university. The requirement of 30 signatures from their own school ensures candidates have genuine support from their constituents. Congress has the final say on approving members, adding democratic accountability. The 2-semester minimum ensures continuity — legislators can serve a full term without graduating mid-session."
+        interpretation="The Legislative Body is the Union's parliament. Each faculty/school sends 1 representative, ensuring equal representation across the university. The requirement of 30 signatures from their own school ensures candidates have genuine support from their constituents. Congress has the final say on approving members, adding democratic accountability. The 2-semester minimum ensures continuity — legislators can serve a full term without graduating mid-session."
       />
 
       <SectionCard
