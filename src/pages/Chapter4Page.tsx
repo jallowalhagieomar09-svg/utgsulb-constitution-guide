@@ -15,7 +15,7 @@ const Chapter4Page = () => {
         provisions={[
           "(1) There shall be the Students' Legislative Body which shall be the legislative arm of the Union.",
           "(2) The Legislative Body shall be composed of representatives from each school/faculty-based sub-association.",
-          "(3) Each school/faculty shall be represented by three (3) members.",
+          "(3) Each school/faculty shall be represented by one (1) member.",
           "(4) Members are recommended by their sub-associations and approved by Congress.",
           "(5) Members serve for one academic year.",
           "(6) A candidate must submit a nomination form with signatures of at least 30 students from their school/faculty.",
