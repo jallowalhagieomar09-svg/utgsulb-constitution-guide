@@ -25,7 +25,7 @@ const Chapter4Page = () => {
           "(10) Selection must be done in utmost good faith based on experience and competence.",
           "(11) Candidates must have at least 2 semesters left for study."
         ]}
-        interpretation="The Legislative Body is the Union's parliament. Each faculty/school sends 3 representatives, ensuring proportional representation across the university. The requirement of 30 signatures from their own school ensures candidates have genuine support from their constituents. Congress has the final say on approving members, adding democratic accountability. The 2-semester minimum ensures continuity — legislators can serve a full term without graduating mid-session."
+        interpretation="The Legislative Body is the Union's parliament. Each faculty/school sends 1 representative, ensuring equal representation across the university. The requirement of 30 signatures from their own school ensures candidates have genuine support from their constituents. Congress has the final say on approving members, adding democratic accountability. The 2-semester minimum ensures continuity — legislators can serve a full term without graduating mid-session."
       />
 
       <SectionCard
