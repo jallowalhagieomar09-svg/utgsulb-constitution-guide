@@ -218,10 +218,15 @@ const BillCard = ({ bill }: { bill: Bill }) => {
           <Icon size={24} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <span className="text-xs font-bold text-primary uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">
               Bill No. {bill.number} of 2025
             </span>
+            {isRejected && (
+              <span className="text-xs font-bold text-destructive uppercase tracking-wider bg-destructive/10 px-2 py-0.5 rounded inline-flex items-center gap-1">
+                <XCircle size={12} /> Rejected
+              </span>
+            )}
           </div>
           <h2 className="font-heading text-xl sm:text-2xl font-bold text-foreground leading-tight">
             {bill.title}
