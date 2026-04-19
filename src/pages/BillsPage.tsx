@@ -10,6 +10,8 @@ const stages = [
   { key: "law", label: "Becomes Law", desc: "The bill becomes law upon assent and comes into force on that day or a future date set by the Legal Adviser — Section 34(7)." },
 ];
 
+type BillStatus = "active" | "rejected";
+
 interface Bill {
   number: number;
   title: string;
