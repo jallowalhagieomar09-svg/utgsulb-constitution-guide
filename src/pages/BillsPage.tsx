@@ -1,4 +1,4 @@
-import { FileText, CheckCircle2, Circle, Clock, Gavel, ScrollText, Users, Accessibility, Vote, CalendarClock } from "lucide-react";
+import { FileText, CheckCircle2, Circle, Clock, Gavel, ScrollText, Users, Accessibility, Vote, CalendarClock, XCircle } from "lucide-react";
 import ChapterHeader from "@/components/ChapterHeader";
 
 const stages = [
