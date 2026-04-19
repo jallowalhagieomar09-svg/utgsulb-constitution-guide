@@ -274,21 +274,46 @@ const BillCard = ({ bill }: { bill: Bill }) => {
       </div>
 
       {/* Stage Timeline */}
-      <div className="bg-secondary/50 rounded-lg p-4 border border-border">
+      <div
+        className={`rounded-lg p-4 border ${
+          isRejected ? "bg-destructive/5 border-destructive/30" : "bg-secondary/50 border-border"
+        }`}
+      >
         <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h3 className="text-xs font-semibold text-primary uppercase tracking-wider flex items-center gap-1.5">
             <Clock size={14} /> Legislative Stage
           </h3>
-          <span className="text-xs bg-primary text-primary-foreground px-3 py-1 rounded-full font-semibold">
-            Currently: {currentStageObj.label}
+          <span
+            className={`text-xs px-3 py-1 rounded-full font-semibold ${
+              isRejected
+                ? "bg-destructive text-destructive-foreground"
+                : "bg-primary text-primary-foreground"
+            }`}
+          >
+            {isRejected ? `Rejected at ${currentStageObj.label}` : `Currently: ${currentStageObj.label}`}
           </span>
         </div>
-        <StageTimeline currentStage={bill.currentStage} />
+        <StageTimeline
+          currentStage={bill.currentStage}
+          status={bill.status}
+          rejectedAt={bill.rejectedAt}
+        />
         <div className="mt-4 pt-3 border-t border-border">
           <p className="text-xs text-muted-foreground">
-            <strong className="text-foreground">What this means:</strong> {currentStageObj.desc} The bill is now
-            scheduled for the <strong className="text-primary">{nextStageObj.label}</strong>, where{" "}
-            {nextStageObj.desc.toLowerCase()}
+            <strong className="text-foreground">What this means:</strong>{" "}
+            {isRejected ? (
+              <>
+                The bill failed to secure the absolute majority required at the {currentStageObj.label} under{" "}
+                Section 34(3)(b) of the Constitution. It will not progress further unless re-tabled as a new
+                bill in a future session of the Legislative Body.
+              </>
+            ) : (
+              <>
+                {currentStageObj.desc} The bill is now scheduled for the{" "}
+                <strong className="text-primary">{nextStageObj?.label}</strong>, where{" "}
+                {nextStageObj?.desc.toLowerCase()}
+              </>
+            )}
           </p>
         </div>
       </div>
