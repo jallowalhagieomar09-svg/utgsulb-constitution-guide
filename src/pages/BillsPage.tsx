@@ -64,6 +64,9 @@ const bills: Bill[] = [
     currentStage: "experts",
     nextStage: "assent",
     status: "active",
+  },
+  {
+    number: 2,
     title: "UTGSU Electoral Commission Amendment Bill, 2025",
     shortTitle: "Electoral Commission Reform",
     icon: Vote,
