@@ -94,8 +94,9 @@ const bills: Bill[] = [
       "Streamlines the appointment process while preserving Congress's oversight role.",
       "Avoids chaos in the selection process during Congress.",
     ],
-    currentStage: "first",
-    nextStage: "second",
+    currentStage: "experts",
+    nextStage: "assent",
+    status: "active",
   },
   {
     number: 3,
