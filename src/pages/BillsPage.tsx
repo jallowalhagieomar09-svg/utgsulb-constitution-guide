@@ -122,8 +122,9 @@ const bills: Bill[] = [
       "Strengthens governance by establishing clearer timelines for convening special meetings.",
       "Aligns procedural timelines with best practices in student governance.",
     ],
-    currentStage: "first",
-    nextStage: "second",
+    currentStage: "second",
+    status: "rejected",
+    rejectedAt: "second",
   },
 ];
 
