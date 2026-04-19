@@ -207,7 +207,8 @@ const StageTimeline = ({
 const BillCard = ({ bill }: { bill: Bill }) => {
   const Icon = bill.icon;
   const currentStageObj = stages.find((s) => s.key === bill.currentStage)!;
-  const nextStageObj = stages.find((s) => s.key === bill.nextStage)!;
+  const nextStageObj = bill.nextStage ? stages.find((s) => s.key === bill.nextStage) : undefined;
+  const isRejected = bill.status === "rejected";
 
   return (
     <article className="section-card animate-fade-in">
