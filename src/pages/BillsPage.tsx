@@ -22,7 +22,9 @@ interface Bill {
   provisions: { heading: string; text: string }[];
   justification: string[];
   currentStage: string; // matches stages.key
-  nextStage: string;
+  nextStage?: string;
+  status: BillStatus;
+  rejectedAt?: string;
 }
 
 const bills: Bill[] = [
