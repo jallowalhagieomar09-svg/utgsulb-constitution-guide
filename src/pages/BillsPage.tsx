@@ -1,4 +1,4 @@
-import { FileText, CheckCircle2, Circle, Clock, Gavel, ScrollText, Users, Accessibility, Vote, CalendarClock } from "lucide-react";
+import { FileText, CheckCircle2, Circle, Clock, Gavel, ScrollText, Users, Accessibility, Vote, CalendarClock, XCircle } from "lucide-react";
 import ChapterHeader from "@/components/ChapterHeader";
 
 const stages = [
@@ -10,6 +10,8 @@ const stages = [
   { key: "law", label: "Becomes Law", desc: "The bill becomes law upon assent and comes into force on that day or a future date set by the Legal Adviser — Section 34(7)." },
 ];
 
+type BillStatus = "active" | "rejected";
+
 interface Bill {
   number: number;
   title: string;
@@ -20,7 +22,9 @@ interface Bill {
   provisions: { heading: string; text: string }[];
   justification: string[];
   currentStage: string; // matches stages.key
-  nextStage: string;
+  nextStage?: string;
+  status: BillStatus;
+  rejectedAt?: string;
 }
 
 const bills: Bill[] = [
@@ -57,8 +61,9 @@ const bills: Bill[] = [
       "Addresses existing barriers and systemic exclusion faced by disabled students.",
       "Encourages the University to improve infrastructure and support services.",
     ],
-    currentStage: "first",
-    nextStage: "second",
+    currentStage: "experts",
+    nextStage: "assent",
+    status: "active",
   },
   {
     number: 2,
@@ -89,8 +94,9 @@ const bills: Bill[] = [
       "Streamlines the appointment process while preserving Congress's oversight role.",
       "Avoids chaos in the selection process during Congress.",
     ],
-    currentStage: "first",
-    nextStage: "second",
+    currentStage: "experts",
+    nextStage: "assent",
+    status: "active",
   },
   {
     number: 3,
@@ -116,22 +122,36 @@ const bills: Bill[] = [
       "Strengthens governance by establishing clearer timelines for convening special meetings.",
       "Aligns procedural timelines with best practices in student governance.",
     ],
-    currentStage: "first",
-    nextStage: "second",
+    currentStage: "second",
+    status: "rejected",
+    rejectedAt: "second",
   },
 ];
 
-const StageTimeline = ({ currentStage }: { currentStage: string }) => {
+const StageTimeline = ({
+  currentStage,
+  status,
+  rejectedAt,
+}: {
+  currentStage: string;
+  status: BillStatus;
+  rejectedAt?: string;
+}) => {
   const currentIdx = stages.findIndex((s) => s.key === currentStage);
+  const rejectedIdx = rejectedAt ? stages.findIndex((s) => s.key === rejectedAt) : -1;
   return (
     <div className="space-y-3">
       {stages.map((stage, idx) => {
-        const completed = idx < currentIdx;
-        const active = idx === currentIdx;
+        const isRejectionPoint = status === "rejected" && idx === rejectedIdx;
+        const completed = status === "rejected" ? idx < rejectedIdx : idx < currentIdx;
+        const active = status === "active" && idx === currentIdx;
+        const dimmed = status === "rejected" && idx > rejectedIdx;
         return (
           <div key={stage.key} className="flex gap-3 items-start">
             <div className="flex flex-col items-center shrink-0">
-              {completed ? (
+              {isRejectionPoint ? (
+                <XCircle size={20} className="text-destructive" />
+              ) : completed ? (
                 <CheckCircle2 size={20} className="text-primary" />
               ) : active ? (
                 <div className="relative">
@@ -142,19 +162,36 @@ const StageTimeline = ({ currentStage }: { currentStage: string }) => {
                 <Circle size={20} className="text-muted-foreground/40" />
               )}
               {idx < stages.length - 1 && (
-                <div className={`w-0.5 h-8 mt-1 ${completed ? "bg-primary" : "bg-border"}`} />
+                <div
+                  className={`w-0.5 h-8 mt-1 ${
+                    isRejectionPoint ? "bg-destructive/40" : completed ? "bg-primary" : "bg-border"
+                  }`}
+                />
               )}
             </div>
             <div className="pb-2">
               <p
                 className={`text-sm font-semibold ${
-                  active ? "text-primary" : completed ? "text-foreground" : "text-muted-foreground"
+                  isRejectionPoint
+                    ? "text-destructive"
+                    : active
+                    ? "text-primary"
+                    : completed
+                    ? "text-foreground"
+                    : dimmed
+                    ? "text-muted-foreground/60"
+                    : "text-muted-foreground"
                 }`}
               >
                 {stage.label}
                 {active && (
                   <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-wider">
                     Current
+                  </span>
+                )}
+                {isRejectionPoint && (
+                  <span className="ml-2 text-xs bg-destructive/10 text-destructive px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Rejected
                   </span>
                 )}
               </p>
@@ -170,7 +207,8 @@ const StageTimeline = ({ currentStage }: { currentStage: string }) => {
 const BillCard = ({ bill }: { bill: Bill }) => {
   const Icon = bill.icon;
   const currentStageObj = stages.find((s) => s.key === bill.currentStage)!;
-  const nextStageObj = stages.find((s) => s.key === bill.nextStage)!;
+  const nextStageObj = bill.nextStage ? stages.find((s) => s.key === bill.nextStage) : undefined;
+  const isRejected = bill.status === "rejected";
 
   return (
     <article className="section-card animate-fade-in">
@@ -180,10 +218,15 @@ const BillCard = ({ bill }: { bill: Bill }) => {
           <Icon size={24} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <span className="text-xs font-bold text-primary uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">
               Bill No. {bill.number} of 2025
             </span>
+            {isRejected && (
+              <span className="text-xs font-bold text-destructive uppercase tracking-wider bg-destructive/10 px-2 py-0.5 rounded inline-flex items-center gap-1">
+                <XCircle size={12} /> Rejected
+              </span>
+            )}
           </div>
           <h2 className="font-heading text-xl sm:text-2xl font-bold text-foreground leading-tight">
             {bill.title}
@@ -231,21 +274,46 @@ const BillCard = ({ bill }: { bill: Bill }) => {
       </div>
 
       {/* Stage Timeline */}
-      <div className="bg-secondary/50 rounded-lg p-4 border border-border">
+      <div
+        className={`rounded-lg p-4 border ${
+          isRejected ? "bg-destructive/5 border-destructive/30" : "bg-secondary/50 border-border"
+        }`}
+      >
         <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h3 className="text-xs font-semibold text-primary uppercase tracking-wider flex items-center gap-1.5">
             <Clock size={14} /> Legislative Stage
           </h3>
-          <span className="text-xs bg-primary text-primary-foreground px-3 py-1 rounded-full font-semibold">
-            Currently: {currentStageObj.label}
+          <span
+            className={`text-xs px-3 py-1 rounded-full font-semibold ${
+              isRejected
+                ? "bg-destructive text-destructive-foreground"
+                : "bg-primary text-primary-foreground"
+            }`}
+          >
+            {isRejected ? `Rejected at ${currentStageObj.label}` : `Currently: ${currentStageObj.label}`}
           </span>
         </div>
-        <StageTimeline currentStage={bill.currentStage} />
+        <StageTimeline
+          currentStage={bill.currentStage}
+          status={bill.status}
+          rejectedAt={bill.rejectedAt}
+        />
         <div className="mt-4 pt-3 border-t border-border">
           <p className="text-xs text-muted-foreground">
-            <strong className="text-foreground">What this means:</strong> {currentStageObj.desc} The bill is now
-            scheduled for the <strong className="text-primary">{nextStageObj.label}</strong>, where{" "}
-            {nextStageObj.desc.toLowerCase()}
+            <strong className="text-foreground">What this means:</strong>{" "}
+            {isRejected ? (
+              <>
+                The bill failed to secure the absolute majority required at the {currentStageObj.label} under{" "}
+                Section 34(3)(b) of the Constitution. It will not progress further unless re-tabled as a new
+                bill in a future session of the Legislative Body.
+              </>
+            ) : (
+              <>
+                {currentStageObj.desc} The bill is now scheduled for the{" "}
+                <strong className="text-primary">{nextStageObj?.label}</strong>, where{" "}
+                {nextStageObj?.desc.toLowerCase()}
+              </>
+            )}
           </p>
         </div>
       </div>
@@ -297,11 +365,16 @@ const BillsPage = () => {
       {/* Footer Note */}
       <div className="mt-8 section-card text-center bg-secondary/30">
         <Users className="text-primary mx-auto mb-2" size={24} />
-        <h3 className="font-heading font-semibold text-foreground mb-1">All Three Bills Have Passed First Reading</h3>
+        <h3 className="font-heading font-semibold text-foreground mb-1">Legislative Update</h3>
         <p className="text-sm text-muted-foreground">
-          Each of the bills above has successfully completed its <strong className="text-foreground">First Reading</strong> and
-          is now scheduled for the <strong className="text-primary">Second Reading</strong>, where Legislative Body members
-          will debate the motions and vote. An absolute majority is required to pass each bill to the next stage.
+          Bills <strong className="text-foreground">No. 1 (Persons With Disabilities Amendment)</strong> and{" "}
+          <strong className="text-foreground">No. 2 (Electoral Commission Amendment)</strong> have passed the
+          Second Reading and are now before the{" "}
+          <strong className="text-primary">Committee of Experts</strong> for proper drafting under Section 34(6),
+          after which they will be forwarded to the President for assent. Bill{" "}
+          <strong className="text-foreground">No. 3 (Special Meetings Amendment)</strong> was{" "}
+          <strong className="text-destructive">rejected at the Second Reading</strong> as it failed to obtain
+          the absolute majority required by Section 34(3)(b).
         </p>
       </div>
     </div>
