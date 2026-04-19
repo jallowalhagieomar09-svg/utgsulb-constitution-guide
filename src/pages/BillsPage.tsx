@@ -365,11 +365,16 @@ const BillsPage = () => {
       {/* Footer Note */}
       <div className="mt-8 section-card text-center bg-secondary/30">
         <Users className="text-primary mx-auto mb-2" size={24} />
-        <h3 className="font-heading font-semibold text-foreground mb-1">All Three Bills Have Passed First Reading</h3>
+        <h3 className="font-heading font-semibold text-foreground mb-1">Legislative Update</h3>
         <p className="text-sm text-muted-foreground">
-          Each of the bills above has successfully completed its <strong className="text-foreground">First Reading</strong> and
-          is now scheduled for the <strong className="text-primary">Second Reading</strong>, where Legislative Body members
-          will debate the motions and vote. An absolute majority is required to pass each bill to the next stage.
+          Bills <strong className="text-foreground">No. 1 (Persons With Disabilities Amendment)</strong> and{" "}
+          <strong className="text-foreground">No. 2 (Electoral Commission Amendment)</strong> have passed the
+          Second Reading and are now before the{" "}
+          <strong className="text-primary">Committee of Experts</strong> for proper drafting under Section 34(6),
+          after which they will be forwarded to the President for assent. Bill{" "}
+          <strong className="text-foreground">No. 3 (Special Meetings Amendment)</strong> was{" "}
+          <strong className="text-destructive">rejected at the Second Reading</strong> as it failed to obtain
+          the absolute majority required by Section 34(3)(b).
         </p>
       </div>
     </div>
