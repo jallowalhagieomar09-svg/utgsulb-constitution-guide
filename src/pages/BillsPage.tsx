@@ -128,17 +128,30 @@ const bills: Bill[] = [
   },
 ];
 
-const StageTimeline = ({ currentStage }: { currentStage: string }) => {
+const StageTimeline = ({
+  currentStage,
+  status,
+  rejectedAt,
+}: {
+  currentStage: string;
+  status: BillStatus;
+  rejectedAt?: string;
+}) => {
   const currentIdx = stages.findIndex((s) => s.key === currentStage);
+  const rejectedIdx = rejectedAt ? stages.findIndex((s) => s.key === rejectedAt) : -1;
   return (
     <div className="space-y-3">
       {stages.map((stage, idx) => {
-        const completed = idx < currentIdx;
-        const active = idx === currentIdx;
+        const isRejectionPoint = status === "rejected" && idx === rejectedIdx;
+        const completed = status === "rejected" ? idx < rejectedIdx : idx < currentIdx;
+        const active = status === "active" && idx === currentIdx;
+        const dimmed = status === "rejected" && idx > rejectedIdx;
         return (
           <div key={stage.key} className="flex gap-3 items-start">
             <div className="flex flex-col items-center shrink-0">
-              {completed ? (
+              {isRejectionPoint ? (
+                <XCircle size={20} className="text-destructive" />
+              ) : completed ? (
                 <CheckCircle2 size={20} className="text-primary" />
               ) : active ? (
                 <div className="relative">
@@ -149,19 +162,36 @@ const StageTimeline = ({ currentStage }: { currentStage: string }) => {
                 <Circle size={20} className="text-muted-foreground/40" />
               )}
               {idx < stages.length - 1 && (
-                <div className={`w-0.5 h-8 mt-1 ${completed ? "bg-primary" : "bg-border"}`} />
+                <div
+                  className={`w-0.5 h-8 mt-1 ${
+                    isRejectionPoint ? "bg-destructive/40" : completed ? "bg-primary" : "bg-border"
+                  }`}
+                />
               )}
             </div>
             <div className="pb-2">
               <p
                 className={`text-sm font-semibold ${
-                  active ? "text-primary" : completed ? "text-foreground" : "text-muted-foreground"
+                  isRejectionPoint
+                    ? "text-destructive"
+                    : active
+                    ? "text-primary"
+                    : completed
+                    ? "text-foreground"
+                    : dimmed
+                    ? "text-muted-foreground/60"
+                    : "text-muted-foreground"
                 }`}
               >
                 {stage.label}
                 {active && (
                   <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full uppercase tracking-wider">
                     Current
+                  </span>
+                )}
+                {isRejectionPoint && (
+                  <span className="ml-2 text-xs bg-destructive/10 text-destructive px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Rejected
                   </span>
                 )}
               </p>
