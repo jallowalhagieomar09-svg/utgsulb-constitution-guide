@@ -16,6 +16,7 @@ const chapters = [
   { path: "/chapter-7", label: "Ch. 7: Electoral Matters", icon: "7️⃣" },
   { path: "/chapter-8", label: "Ch. 8: Sub-Associations", icon: "8️⃣" },
   { path: "/chapter-9", label: "Ch. 9: Miscellaneous", icon: "9️⃣" },
+  { path: "/members", label: "7th Legislature", icon: "👥" },
   { path: "/bills", label: "Ongoing Bills", icon: "📝" },
 ];
 
