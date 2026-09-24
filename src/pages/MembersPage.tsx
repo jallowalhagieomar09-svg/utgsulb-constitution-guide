@@ -15,7 +15,7 @@ interface Member {
   name: string;
   position: string;
   association: string;
-  photo: { url: string };
+  photo: string;
   isOfficer?: boolean;
 }
 
@@ -148,7 +148,7 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
       <div className="relative mb-4">
         <div className={`rounded-full border-4 border-primary/30 overflow-hidden ${compact ? "h-32 w-32" : "h-40 w-40"} shadow-md group-hover:border-primary/60 transition-colors`}>
           <img
-            src={member.photo.url}
+            src={member.photo}
             alt={member.name}
             className="h-full w-full object-cover"
           />
