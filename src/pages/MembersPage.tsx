@@ -1,15 +1,15 @@
 import { Users } from "lucide-react";
 import ChapterHeader from "@/components/ChapterHeader";
 
-import yusuphaJatta from "@/assets/members/member-yusupha-jatta.jpg.asset.json";
-import emilGibba from "@/assets/members/member-emil-gibba.jpg.asset.json";
-import alhagieJallow from "@/assets/members/member-alhagie-jallow.jpg.asset.json";
-import sophieSissoho from "@/assets/members/member-sophie-sissoho.jpg.asset.json";
-import fatouBoye from "@/assets/members/member-fatou-boye.jpg.asset.json";
-import ebrimaSabally from "@/assets/members/member-ebrima-sabally.jpg.asset.json";
-import fodayMinteh from "@/assets/members/member-foday-minteh.jpg.asset.json";
-import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg.asset.json";
-import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg.asset.json";
+import yusuphaJatta from "@/assets/members/member-yusupha-jatta.jpg";
+import emilGibba from "@/assets/members/member-emil-gibba.jpg";
+import alhagieJallow from "@/assets/members/member-alhagie-jallow.jpg";
+import sophieSissoho from "@/assets/members/member-sophie-sissoho.jpg";
+import fatouBoye from "@/assets/members/member-fatou-boye.jpg";
+import ebrimaSabally from "@/assets/members/member-ebrima-sabally.jpg";
+import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
+import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
+import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
 
 interface Member {
   name: string;
