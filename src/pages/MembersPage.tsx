@@ -87,8 +87,9 @@ const MembersPage = () => {
   return (
     <div>
       <ChapterHeader
+        chapter="7th Legislative Body"
         title="Members of the 7th Legislative Body"
-        subtitle="The elected representatives of the 2024/2025 academic year"
+        description="The elected representatives of the 2024/2025 academic year"
       />
 
       <div className="mb-8 p-4 bg-secondary/50 border-l-4 border-primary rounded-r-lg">

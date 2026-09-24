@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText } from "lucide-react";
+import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText, UserCircle } from "lucide-react";
 import suLogo from "@/assets/su-logo.jpg";
 import slbLogo from "@/assets/slb-logo.jpg";
 
@@ -14,6 +14,7 @@ const chapters = [
   { path: "/chapter-7", title: "Ch. 7: Electoral Matters", desc: "Elections, procedures, qualifications, congress, and extraordinary sessions.", icon: Vote },
   { path: "/chapter-8", title: "Ch. 8: Sub-Associations", desc: "Sub-associations, committees, commissions, and the Electoral Commission.", icon: Users },
   { path: "/chapter-9", title: "Ch. 9: Miscellaneous", desc: "Awards, code of conduct, oath of office, commencement, and review.", icon: Award },
+  { path: "/members", title: "7th Legislative Body Members", desc: "Meet the Speaker, Deputy Speaker, Clerk, Deputy Clerk, and association representatives of the 7th Legislature.", icon: UserCircle },
   { path: "/bills", title: "Ongoing Bills", desc: "Active amendment bills before the Legislative Body and their current legislative stage.", icon: FileText },
 ];
 
