@@ -61,8 +61,7 @@ const bills: Bill[] = [
       "Addresses existing barriers and systemic exclusion faced by disabled students.",
       "Encourages the University to improve infrastructure and support services.",
     ],
-    currentStage: "experts",
-    nextStage: "assent",
+    currentStage: "law",
     status: "active",
   },
   {
@@ -94,8 +93,7 @@ const bills: Bill[] = [
       "Streamlines the appointment process while preserving Congress's oversight role.",
       "Avoids chaos in the selection process during Congress.",
     ],
-    currentStage: "experts",
-    nextStage: "assent",
+    currentStage: "law",
     status: "active",
   },
   {
@@ -307,11 +305,16 @@ const BillCard = ({ bill }: { bill: Bill }) => {
                 Section 34(3)(b) of the Constitution. It will not progress further unless re-tabled as a new
                 bill in a future session of the Legislative Body.
               </>
-            ) : (
+            ) : nextStageObj ? (
               <>
                 {currentStageObj.desc} The bill is now scheduled for the{" "}
-                <strong className="text-primary">{nextStageObj?.label}</strong>, where{" "}
-                {nextStageObj?.desc.toLowerCase()}
+                <strong className="text-primary">{nextStageObj.label}</strong>, where{" "}
+                {nextStageObj.desc.toLowerCase()}
+              </>
+            ) : (
+              <>
+                {currentStageObj.desc} The bill has now become law and comes into force on the day of assent or
+                on a future date set by the Legal Adviser under Section 34(7).
               </>
             )}
           </p>
@@ -368,10 +371,9 @@ const BillsPage = () => {
         <h3 className="font-heading font-semibold text-foreground mb-1">Legislative Update</h3>
         <p className="text-sm text-muted-foreground">
           Bills <strong className="text-foreground">No. 1 (Persons With Disabilities Amendment)</strong> and{" "}
-          <strong className="text-foreground">No. 2 (Electoral Commission Amendment)</strong> have passed the
-          Second Reading and are now before the{" "}
-          <strong className="text-primary">Committee of Experts</strong> for proper drafting under Section 34(6),
-          after which they will be forwarded to the President for assent. Bill{" "}
+          <strong className="text-foreground">No. 2 (Electoral Commission Amendment)</strong> have been assented
+          to by <strong className="text-foreground">HE Muhammed Ngallan, President of the 22nd Executive
+          Council</strong>, and have now become law under Section 34(6)–(7). Bill{" "}
           <strong className="text-foreground">No. 3 (Special Meetings Amendment)</strong> was{" "}
           <strong className="text-destructive">rejected at the Second Reading</strong> as it failed to obtain
           the absolute majority required by Section 34(3)(b).
