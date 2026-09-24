@@ -16,6 +16,7 @@ import Chapter7Page from "@/pages/Chapter7Page";
 import Chapter8Page from "@/pages/Chapter8Page";
 import Chapter9Page from "@/pages/Chapter9Page";
 import BillsPage from "@/pages/BillsPage";
+import MembersPage from "@/pages/MembersPage";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/chapter-8" element={<Chapter8Page />} />
             <Route path="/chapter-9" element={<Chapter9Page />} />
             <Route path="/bills" element={<BillsPage />} />
+            <Route path="/members" element={<MembersPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
