@@ -147,34 +147,34 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
     <div
       className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40"
     >
-      {/* Photo with golden gradient base */}
-      <div className="relative">
-        <div className="gold-gradient absolute inset-0" />
+      {/* Photo with golden gradient border frame */}
+      <div className="gold-gradient p-1.5">
         <img
           src={member.photo}
           alt={member.name}
-          className={`relative w-full ${compact ? "h-56" : "h-72"} object-cover object-top`}
+          className={`w-full rounded-xl ${compact ? "h-56" : "h-72"} object-cover object-top`}
         />
-        {/* Position badge overlay */}
+      </div>
+      {/* Position badge overlay */}
+      <div className="relative">
         {member.isOfficer ? (
-          <span className="absolute top-3 right-3 bg-white/70 dark:bg-black/50 backdrop-blur-md text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full shadow whitespace-nowrap">
+          <span className="absolute -top-9 right-3 bg-white/70 dark:bg-black/50 backdrop-blur-md text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full shadow whitespace-nowrap">
             {member.position}
           </span>
         ) : (
-          <span className="absolute top-3 right-3 bg-white/70 dark:bg-black/50 backdrop-blur-md text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full shadow whitespace-nowrap">
+          <span className="absolute -top-9 right-3 bg-white/70 dark:bg-black/50 backdrop-blur-md text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full shadow whitespace-nowrap">
             Representative
           </span>
         )}
-      </div>
-
-      {/* Glassmorphism name plate */}
-      <div className="px-5 py-4 text-center bg-white/50 dark:bg-white/5 backdrop-blur-lg">
-        <h3 className="font-heading font-semibold text-foreground group-hover:text-primary transition-colors">
-          {member.name}
-        </h3>
-        <p className="text-sm text-muted-foreground mt-1 leading-snug">
-          {member.association}
-        </p>
+        {/* Golden gradient name plate */}
+        <div className="gold-gradient px-5 py-4 text-center">
+          <h3 className="font-heading font-semibold text-primary-foreground group-hover:brightness-110 transition-all">
+            {member.name}
+          </h3>
+          <p className="text-sm text-primary-foreground/90 mt-1 leading-snug">
+            {member.association}
+          </p>
+        </div>
       </div>
     </div>
   );
