@@ -1,23 +1,42 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Mail, Phone, BookOpen, ChevronRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  Mail,
+  Phone,
+  BookOpen,
+  ChevronRight,
+  Home,
+  ScrollText,
+  FileText,
+  Users,
+  Landmark,
+  Gavel,
+  Scale,
+  Banknote,
+  Vote,
+  Network,
+  Award,
+  UserCircle,
+} from "lucide-react";
 import suLogo from "@/assets/su-logo.jpg";
 import slbLogo from "@/assets/slb-logo.jpg";
 
 const chapters = [
-  { path: "/", label: "Home", icon: "🏠" },
-  { path: "/preamble", label: "Preamble", icon: "📜" },
-  { path: "/chapter-1", label: "Ch. 1: Preliminary", icon: "1️⃣" },
-  { path: "/chapter-2", label: "Ch. 2: Membership & Objectives", icon: "2️⃣" },
-  { path: "/chapter-3", label: "Ch. 3: Executive Council", icon: "3️⃣" },
-  { path: "/chapter-4", label: "Ch. 4: Legislative Body", icon: "4️⃣" },
-  { path: "/chapter-5", label: "Ch. 5: Judicial Tribunal", icon: "5️⃣" },
-  { path: "/chapter-6", label: "Ch. 6: Financial Matters", icon: "6️⃣" },
-  { path: "/chapter-7", label: "Ch. 7: Electoral Matters", icon: "7️⃣" },
-  { path: "/chapter-8", label: "Ch. 8: Sub-Associations", icon: "8️⃣" },
-  { path: "/chapter-9", label: "Ch. 9: Miscellaneous", icon: "9️⃣" },
-  { path: "/members", label: "7th Legislature", icon: "👥" },
-  { path: "/bills", label: "Ongoing Bills", icon: "📝" },
+  { path: "/", label: "Home", icon: Home },
+  { path: "/preamble", label: "Preamble", icon: ScrollText },
+  { path: "/chapter-1", label: "Ch. 1: Preliminary", icon: BookOpen },
+  { path: "/chapter-2", label: "Ch. 2: Membership & Objectives", icon: Users },
+  { path: "/chapter-3", label: "Ch. 3: Executive Council", icon: Landmark },
+  { path: "/chapter-4", label: "Ch. 4: Legislative Body", icon: Gavel },
+  { path: "/chapter-5", label: "Ch. 5: Judicial Tribunal", icon: Scale },
+  { path: "/chapter-6", label: "Ch. 6: Financial Matters", icon: Banknote },
+  { path: "/chapter-7", label: "Ch. 7: Electoral Matters", icon: Vote },
+  { path: "/chapter-8", label: "Ch. 8: Sub-Associations", icon: Network },
+  { path: "/chapter-9", label: "Ch. 9: Miscellaneous", icon: Award },
+  { path: "/members", label: "7th Legislature", icon: UserCircle },
+  { path: "/bills", label: "Ongoing Bills", icon: FileText },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -95,7 +114,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                       : "text-primary-foreground/80 hover:bg-primary-foreground/10 hover:text-primary-foreground"
                   }`}
                 >
-                  <span className="text-base">{ch.icon}</span>
+                  <ch.icon size={16} className="shrink-0" />
                   <span className="flex-1">{ch.label}</span>
                   {isActive && <ChevronRight size={14} />}
                 </Link>
