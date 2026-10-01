@@ -48,6 +48,13 @@
     --gold-gradient: linear-gradient(135deg, hsl(38 72% 32%), hsl(38 60% 45%));
     --hero-overlay: linear-gradient(180deg, hsla(38, 72%, 20%, 0.9), hsla(38, 72%, 15%, 0.95));
 
+    /* Futuristic glass system (gold-tinted) */
+    --glass-line: linear-gradient(135deg, hsl(38 72% 32% / 0.5), hsl(40 80% 60% / 0.14));
+    --glass-fill: linear-gradient(135deg, hsl(0 0% 100% / 0.62), hsl(38 60% 92% / 0.28));
+    --glass-shadow: 0 10px 40px -16px hsl(38 72% 22% / 0.35), inset 0 1px 0 hsl(0 0% 100% / 0.65);
+    --glow-a: 38 90% 62%;
+    --glow-b: 30 55% 72%;
+
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
   }
@@ -89,6 +96,12 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    background-image:
+      radial-gradient(60rem 42rem at 6% -12%, hsl(var(--glow-a) / 0.2), transparent 60%),
+      radial-gradient(52rem 38rem at 104% -4%, hsl(var(--glow-b) / 0.18), transparent 55%),
+      radial-gradient(48rem 34rem at 50% 118%, hsl(var(--glow-a) / 0.12), transparent 60%),
+      linear-gradient(180deg, hsl(40 30% 98%), hsl(38 22% 95%));
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -101,13 +114,75 @@
     background: var(--gold-gradient);
   }
 
+  /* Frosted glass surface with a thin gold gradient edge */
+  .glass-card {
+    position: relative;
+    border-radius: 1rem;
+    background: var(--glass-fill);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid hsl(38 50% 40% / 0.18);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--glass-line);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Glassy gold top bar */
+  .glass-header {
+    background: linear-gradient(135deg, hsl(38 72% 26% / 0.82), hsl(38 55% 38% / 0.68));
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid hsl(42 85% 72% / 0.35);
+  }
+
+  /* Glassy gold sidebar */
+  .glass-sidebar {
+    background: linear-gradient(180deg, hsl(38 70% 25% / 0.85), hsl(30 45% 16% / 0.88));
+    backdrop-filter: blur(22px) saturate(1.45);
+    -webkit-backdrop-filter: blur(22px) saturate(1.45);
+    border-right: 1px solid hsl(42 85% 72% / 0.22);
+  }
+
+  /* Soft aurora glow behind the hero */
+  .hero-glow {
+    position: absolute;
+    top: -6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 16rem;
+    width: 38rem;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, hsl(var(--glow-a) / 0.35), transparent 70%);
+    filter: blur(12px);
+    pointer-events: none;
+  }
+
   .section-card {
-    @apply bg-card rounded-lg border border-border p-6 shadow-sm transition-all duration-200;
+    @apply rounded-xl p-6 transition-all duration-300;
+    position: relative;
+    background: var(--glass-fill);
+    backdrop-filter: blur(16px) saturate(1.35);
+    -webkit-backdrop-filter: blur(16px) saturate(1.35);
+    border: 1px solid hsl(38 50% 40% / 0.16);
+    box-shadow: var(--glass-shadow);
   }
 
   .section-card:hover {
-    @apply shadow-md;
-    border-color: hsl(var(--primary) / 0.3);
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.35);
+    box-shadow: 0 16px 44px -16px hsl(38 72% 22% / 0.4), inset 0 1px 0 hsl(0 0% 100% / 0.65);
   }
 
   .chapter-header {
@@ -121,7 +196,11 @@
   }
 
   .interpretation-box {
-    @apply bg-secondary/50 border-l-4 border-primary rounded-r-lg p-4 my-4;
+    @apply rounded-r-xl p-4 my-4;
+    background: linear-gradient(135deg, hsl(38 60% 45% / 0.12), hsl(38 60% 45% / 0.04));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 3px solid hsl(var(--primary));
   }
 
   .nav-link-active {

@@ -46,7 +46,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top Navbar */}
-      <header className="gold-gradient sticky top-0 z-50 shadow-lg">
+      <header className="glass-header sticky top-0 z-50 shadow-lg">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
             <button
@@ -90,7 +90,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-1">
         {/* Sidebar */}
         <aside
-          className={`fixed lg:sticky top-[64px] left-0 z-40 h-[calc(100vh-64px)] w-72 gold-gradient overflow-y-auto transition-transform duration-300 lg:translate-x-0 ${
+          className={`fixed lg:sticky top-[64px] left-0 z-40 h-[calc(100vh-64px)] w-72 glass-sidebar overflow-y-auto transition-transform duration-300 lg:translate-x-0 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -148,6 +148,34 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </main>
       </div>
+
+      {/* Footer */}
+      <footer className="glass-header mt-auto">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center space-y-3">
+          <div className="flex justify-center gap-5">
+            <a
+              href="mailto:utgsulb2023@gmail.com"
+              className="text-primary-foreground/80 hover:text-primary-foreground transition-colors inline-flex items-center gap-2 text-sm"
+            >
+              <Mail size={16} /> utgsulb2023@gmail.com
+            </a>
+            <a
+              href="https://wa.me/2203715802"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-foreground/80 hover:text-primary-foreground transition-colors inline-flex items-center gap-2 text-sm"
+            >
+              <Phone size={16} /> +220 3715802
+            </a>
+          </div>
+          <p className="text-primary-foreground/85 text-sm font-medium">
+            An initiative of the 7th Legislative Body — UTG Students' Union
+          </p>
+          <p className="text-primary-foreground/60 text-xs">
+            © 2026 UTGSU Legislative Body · "Solidarity • Dedication • Service"
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
