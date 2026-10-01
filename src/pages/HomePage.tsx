@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText, UserCircle } from "lucide-react";
+import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText, UserCircle, Sparkles } from "lucide-react";
 import suLogo from "@/assets/su-logo.jpg";
 import slbLogo from "@/assets/slb-logo.jpg";
 
@@ -22,19 +22,27 @@ const HomePage = () => {
   return (
     <div>
       {/* Hero */}
-      <div className="text-center mb-12">
-        <div className="flex justify-center items-center gap-4 mb-6">
-          <img src={suLogo} alt="UTGSU Logo" className="h-20 w-20 rounded-full border-4 border-primary/30 object-cover shadow-lg" />
-          <img src={slbLogo} alt="UTGSU SLB Logo" className="h-20 w-20 rounded-full border-4 border-primary/30 object-cover shadow-lg" />
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-4">
-          UTGSU Constitution Guide
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          A comprehensive breakdown and detailed explanation of the <strong className="text-foreground">University of The Gambia Students' Union Constitution 2021</strong>, prepared by the Students' Union Legislative Body.
-        </p>
-        <div className="flex justify-center gap-3 mt-4 text-sm text-muted-foreground">
-          <span className="font-heading italic">"Solidarity • Dedication • Service"</span>
+      <div className="glass-card text-center mb-12 px-6 py-10 sm:px-10 sm:py-12 overflow-hidden relative">
+        <div className="hero-glow" aria-hidden />
+        <div className="relative">
+          <div className="flex justify-center items-center gap-4 mb-6">
+            <img src={suLogo} alt="UTGSU Logo" className="h-20 w-20 rounded-full border-4 border-primary/30 object-cover shadow-lg" />
+            <img src={slbLogo} alt="UTGSU SLB Logo" className="h-20 w-20 rounded-full border-4 border-primary/30 object-cover shadow-lg" />
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-heading font-bold text-primary mb-4">
+            UTGSU Constitution Guide
+          </h1>
+          <div className="flex justify-center mb-5">
+            <span className="inline-flex items-center gap-2 gold-gradient text-primary-foreground px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-md">
+              <Sparkles size={13} /> An initiative of the 7th Legislative Body
+            </span>
+          </div>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            A comprehensive breakdown and detailed explanation of the <strong className="text-foreground">University of The Gambia Students' Union Constitution 2021</strong>, prepared by the Students' Union Legislative Body.
+          </p>
+          <div className="flex justify-center gap-3 mt-4 text-sm text-muted-foreground">
+            <span className="font-heading italic">"Solidarity • Dedication • Service"</span>
+          </div>
         </div>
       </div>
 
