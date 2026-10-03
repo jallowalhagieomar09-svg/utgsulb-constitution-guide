@@ -1,0 +1,16 @@
+{
+  "name": "UTGSU Legislative Body — Constitution Guide",
+  "short_name": "UTGSU-LB",
+  "description": "Explore the UTG Students' Union Constitution and the work of its Legislative Body.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f5ee",
+  "theme_color": "#94672d",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

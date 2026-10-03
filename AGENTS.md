@@ -1,0 +1,2 @@
+- Keep installability manifest-only, without app-shell service workers, because the requested web install does not require offline caching.
+- Derive home-screen icons and favicon from the official Legislative Body seal so installed identity matches the website.
