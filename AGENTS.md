@@ -1,2 +1,3 @@
 - Keep installability manifest-only, without app-shell service workers, because the requested web install does not require offline caching.
 - Derive home-screen icons and favicon from the official Legislative Body seal so installed identity matches the website.
+- Proxy Lovable asset requests to the hosted app during local development so CDN-backed portraits render without storing uploaded binaries in source.
