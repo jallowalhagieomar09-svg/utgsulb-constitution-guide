@@ -1,3 +1,3 @@
-- [ ] Add Hon. Kawsu Manneh’s NSA representative portrait and details.
-- [ ] Replace summarized minister functions with individual constitutional sections and interpretations.
-- [ ] Verify both updated pages.
+- [x] Add Hon. Kawsu Manneh’s NSA representative portrait and details.
+- [x] Replace summarized minister functions with individual constitutional sections and interpretations.
+- [x] Verify both updated pages.
