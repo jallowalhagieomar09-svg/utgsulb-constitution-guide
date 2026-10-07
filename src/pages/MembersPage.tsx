@@ -10,6 +10,7 @@ import ebrimaSabally from "@/assets/members/member-ebrima-sabally.jpg";
 import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
 import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
 import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
+import kawsuManneh from "@/assets/members/member-kawsu-manneh.jpg.asset.json";
 
 interface Member {
   name: string;
@@ -77,6 +78,12 @@ const members: Member[] = [
     position: "Member",
     association: "Medicine Students' Association (UniGAMSA)",
     photo: aimanBadjan,
+  },
+  {
+    name: "Hon. Kawsu Manneh",
+    position: "Representative",
+    association: "Nursing Students' Association (NSA)",
+    photo: kawsuManneh.url,
   },
 ];
 
