@@ -52,7 +52,7 @@ const members: Member[] = [
   {
     name: "Hon. Fatou I. Boye",
     position: "Member",
-    association: "Agriculture and Environment Students' Association (AESSA)",
+    association: "Agriculture and Environmental Sciences Students' Association",
     photo: fatouBoye,
   },
   {
@@ -70,7 +70,7 @@ const members: Member[] = [
   {
     name: "Hon. Ramatoulie Jitteh",
     position: "Member",
-    association: "Engineering and Architecture Students' Association (SEASA)",
+    association: "School of Engineering and Architecture Students' Association (SEASA)",
     photo: ramatoulieJitteh,
   },
   {
