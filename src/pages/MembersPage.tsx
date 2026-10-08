@@ -83,7 +83,7 @@ const members: Member[] = [
     name: "Hon. Kawsu Manneh",
     position: "Representative",
     association: "Nursing Students' Association (NSA)",
-    photo: kawsuManneh.url,
+    photo: new URL(kawsuManneh.url, "https://utgsulb-constitution-guide.lovable.app").href,
   },
 ];
 
