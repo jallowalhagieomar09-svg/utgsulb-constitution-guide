@@ -11,6 +11,7 @@ import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
 import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
 import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
 import kawsuManneh from "@/assets/members/member-kawsu-manneh.jpg.asset.json";
+import ebouSowe from "@/assets/members/member-ebou-sowe.svg";
 
 interface Member {
   name: string;
@@ -84,6 +85,12 @@ const members: Member[] = [
     position: "Representative",
     association: "Nursing Students' Association (NSA)",
     photo: new URL(kawsuManneh.url, "https://utgsulb-constitution-guide.lovable.app").href,
+  },
+  {
+    name: "Hon. Ebou Sowe",
+    position: "Representative",
+    association: "Economic and Management Students' Association (ECOMANSA)",
+    photo: ebouSowe,
   },
 ];
 
