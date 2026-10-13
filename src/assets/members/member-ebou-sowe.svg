@@ -23,7 +23,4 @@
         font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700"
         fill="#fdf6e6" opacity="0.92" letter-spacing="10">ES</text>
 
-  <g opacity="0.45" stroke="#fdf3dc" stroke-width="2">
-    <path d="M170 420h260"/>
-  </g>
 </svg>
