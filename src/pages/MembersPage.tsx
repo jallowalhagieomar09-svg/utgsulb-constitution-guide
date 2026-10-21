@@ -11,7 +11,7 @@ import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
 import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
 import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
 import kawsuManneh from "@/assets/members/member-kawsu-manneh.jpg.asset.json";
-import ebouSowe from "@/assetss/members/member-ebou-sowe.jpg.jpeg
+import ebouSowe from "@/assetss/members/member-ebou-sowe.jpg.jpeg";
 interface Member {
   name: string;
   position: string;
