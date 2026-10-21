@@ -1,4 +1,5 @@
-import { Users } from "lucide-react";
+import { useState } from "react";
+import { UserCircle, Users } from "lucide-react";
 import ChapterHeader from "@/components/ChapterHeader";
 
 import yusuphaJatta from "@/assets/members/member-yusupha-jatta.jpg";
@@ -11,7 +12,11 @@ import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
 import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
 import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
 import kawsuManneh from "@/assets/members/member-kawsu-manneh.jpg.asset.json";
-import ebouSowe from "@/assetss/members/member-ebou-sowe.jpg.jpeg";
+import ebouSowe from "@/assets/members/member-ebou-sowe.jpg";
+
+const LOVABLE_ASSET_ORIGIN = "https://utgsulb-constitution-guide.lovable.app";
+const kawsuMannehPhoto = new URL(kawsuManneh.url, LOVABLE_ASSET_ORIGIN).href;
+
 interface Member {
   name: string;
   position: string;
@@ -83,7 +88,7 @@ const members: Member[] = [
     name: "Hon. Kawsu Manneh",
     position: "Representative",
     association: "Nursing Students' Association (NSA)",
-    photo: new URL(kawsuManneh.url, "https://utgsulb-constitution-guide.lovable.app").href,
+    photo: kawsuMannehPhoto,
   },
   {
     name: "Hon. Ebou Sowe",
@@ -154,16 +159,31 @@ interface MemberCardProps {
 }
 
 const MemberCard = ({ member, compact }: MemberCardProps) => {
+  const [photoFailed, setPhotoFailed] = useState(false);
+  const showPhoto = Boolean(member.photo) && !photoFailed;
+
   return (
     <div
       className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-primary/20 hover:-translate-y-0.5"
     >
       <div className="gold-gradient p-1.5">
-        <img
-          src={member.photo}
-          alt={member.name}
-          className={`w-full rounded-xl ${compact ? "h-56" : "h-72"} object-cover object-top`}
-        />
+        {showPhoto ? (
+          <img
+            src={member.photo}
+            alt={member.name}
+            className={`w-full rounded-xl ${compact ? "h-56" : "h-72"} object-cover object-top`}
+            onError={() => setPhotoFailed(true)}
+          />
+        ) : (
+          <div
+            className={`w-full rounded-xl ${compact ? "h-56" : "h-72"} bg-secondary/80 flex flex-col items-center justify-center gap-2`}
+            role="img"
+            aria-label={`${member.name} portrait unavailable`}
+          >
+            <UserCircle className="text-primary" size={compact ? 64 : 80} aria-hidden />
+            <span className="text-xs font-medium text-primary/80">Portrait unavailable</span>
+          </div>
+        )}
       </div>
       <div className="relative">
         {member.isOfficer ? (
