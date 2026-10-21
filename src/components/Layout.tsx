@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Menu,
@@ -19,6 +19,7 @@ import {
   Network,
   Award,
   UserCircle,
+  Search,
 } from "lucide-react";
 import suLogo from "@/assets/su-logo.jpg";
 import slbLogo from "@/assets/slb-logo.jpg";
@@ -39,33 +40,105 @@ const chapters = [
   { path: "/bills", label: "Ongoing Bills", icon: FileText },
 ];
 
+const searchablePages = [
+  { path: "/", label: "Home", keywords: "home utgsu constitution guide overview introduction union" },
+  { path: "/preamble", label: "Preamble", keywords: "preamble principles aspirations founding values" },
+  { path: "/chapter-1", label: "Chapter 1", keywords: "chapter one preliminary citation interpretation name legal recognition seal supremacy constitution" },
+  { path: "/chapter-2", label: "Chapter 2", keywords: "chapter two membership objectives rights duties cessation members union" },
+  { path: "/chapter-3", label: "Chapter 3", keywords: "chapter three executive council president vice president ministers powers executive" },
+  { path: "/chapter-4", label: "Chapter 4", keywords: "chapter four legislative body parliament bills motions impeachment members senate assembly" },
+  { path: "/chapter-5", label: "Chapter 5", keywords: "chapter five judicial tribunal jurisdiction proceedings enforcement justice court" },
+  { path: "/chapter-6", label: "Chapter 6", keywords: "chapter six financial matters finance accounts budget committee money" },
+  { path: "/chapter-7", label: "Chapter 7", keywords: "chapter seven electoral matters elections procedures qualifications congress extraordinary sessions voting" },
+  { path: "/chapter-8", label: "Chapter 8", keywords: "chapter eight sub associations committees commissions electoral commission education" },
+  { path: "/chapter-9", label: "Chapter 9", keywords: "chapter nine miscellaneous awards code conduct oath commencement review amendments" },
+  { path: "/members", label: "7th Legislative Body", keywords: "members speaker deputy speaker clerk deputy clerk representatives legislative body utgsu student union" },
+  { path: "/bills", label: "Ongoing Bills", keywords: "bills ongoing amendments legislative process committee motions senate" },
+];
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [globalSearch, setGlobalSearch] = useState("");
   const location = useLocation();
+
+  const searchResults = useMemo(() => {
+    const query = globalSearch.trim().toLowerCase();
+
+    if (!query) {
+      return [];
+    }
+
+    return searchablePages.filter((item) => {
+      const haystack = `${item.label} ${item.keywords}`.toLowerCase();
+      return haystack.includes(query);
+    });
+  }, [globalSearch]);
+
+  const clearSearch = () => {
+    setGlobalSearch("");
+    setSidebarOpen(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top Navbar */}
       <header className="glass-header sticky top-0 z-50 shadow-lg">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between px-4 py-3 gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className="lg:hidden text-primary-foreground"
+              aria-label="Toggle navigation"
             >
               {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-            <Link to="/" className="flex items-center gap-2">
+
+            <Link to="/" className="flex items-center gap-2 min-w-0">
               <img src={suLogo} alt="UTGSU Logo" className="h-10 w-10 rounded-full border-2 border-primary-foreground/30 object-cover" />
               <img src={slbLogo} alt="UTGSU SLB Logo" className="h-10 w-10 rounded-full border-2 border-primary-foreground/30 object-cover" />
-              <div className="hidden sm:block">
-                <h1 className="text-primary-foreground font-heading text-lg font-bold leading-tight">
+              <div className="hidden sm:block min-w-0">
+                <h1 className="text-primary-foreground font-heading text-lg font-bold leading-tight truncate">
                   UTG Students' Union
                 </h1>
                 <p className="text-primary-foreground/80 text-xs">Legislative Body — Constitution Guide</p>
               </div>
             </Link>
           </div>
+
+          <div className="relative hidden md:block w-[320px] shrink-0">
+            <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary-foreground/70" />
+            <input
+              type="search"
+              value={globalSearch}
+              onChange={(event) => setGlobalSearch(event.target.value)}
+              placeholder="Search the site..."
+              className="w-full rounded-full border border-primary-foreground/20 bg-primary-foreground/10 pl-9 pr-3 py-2 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-primary-foreground/40"
+              aria-label="Search the site"
+            />
+
+            {globalSearch.trim() && (
+              <div className="absolute left-0 right-0 top-[calc(100%+10px)] z-50 rounded-xl border border-border bg-background/95 p-2 shadow-xl backdrop-blur-md">
+                {searchResults.length > 0 ? (
+                  <div className="space-y-1">
+                    {searchResults.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        onClick={clearSearch}
+                        className="flex items-center justify-between gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary"
+                      >
+                        <span className="font-medium text-foreground">{item.label}</span>
+                        <span className="text-xs text-muted-foreground">Open</span>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="px-3 py-2 text-sm text-muted-foreground">No matching pages found.</div>
+                )}
+              </div>
+            )}
+          </div>
+
           <div className="flex items-center gap-3">
             <a
               href="mailto:utgsulb2023@gmail.com"
@@ -85,6 +158,40 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             </a>
           </div>
         </div>
+
+        <div className="px-4 pb-3 md:hidden">
+          <div className="relative">
+            <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary-foreground/70" />
+            <input
+              type="search"
+              value={globalSearch}
+              onChange={(event) => setGlobalSearch(event.target.value)}
+              placeholder="Search the site..."
+              className="w-full rounded-full border border-primary-foreground/20 bg-primary-foreground/10 pl-9 pr-3 py-2 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-primary-foreground/40"
+              aria-label="Search the site"
+            />
+          </div>
+          {globalSearch.trim() && (
+            <div className="mt-2 rounded-xl border border-border bg-background/95 p-2 shadow-xl">
+              {searchResults.length > 0 ? (
+                <div className="space-y-1">
+                  {searchResults.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={clearSearch}
+                      className="block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-secondary"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="px-3 py-2 text-sm text-muted-foreground">No matching pages found.</div>
+              )}
+            </div>
+          )}
+        </div>
       </header>
 
       <div className="flex flex-1">
@@ -95,6 +202,39 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           }`}
         >
           <nav className="p-4 space-y-1">
+            <div className="mb-4 rounded-lg border border-primary-foreground/15 bg-primary-foreground/5 p-3">
+              <label className="relative block">
+                <span className="sr-only">Search the site</span>
+                <Search className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary-foreground/70" />
+                <input
+                  type="search"
+                  value={globalSearch}
+                  onChange={(event) => setGlobalSearch(event.target.value)}
+                  placeholder="Search pages..."
+                  className="w-full rounded-lg border border-primary-foreground/20 bg-transparent pl-9 pr-3 py-2 text-sm text-primary-foreground placeholder:text-primary-foreground/60 outline-none focus:border-primary-foreground/40"
+                />
+              </label>
+
+              {globalSearch.trim() && (
+                <div className="mt-3 space-y-1 rounded-lg border border-border bg-background/80 p-2">
+                  {searchResults.length > 0 ? (
+                    searchResults.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        onClick={clearSearch}
+                        className="block rounded-md px-2 py-1.5 text-sm text-foreground hover:bg-secondary"
+                      >
+                        {item.label}
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="px-2 py-1.5 text-xs text-muted-foreground">No matches</div>
+                  )}
+                </div>
+              )}
+            </div>
+
             <div className="flex items-center gap-2 px-3 py-2 mb-4">
               <BookOpen size={18} className="text-primary-foreground/70" />
               <span className="text-primary-foreground/70 text-sm font-medium uppercase tracking-wider">
