@@ -5,7 +5,6 @@ import ChapterHeader from "@/components/ChapterHeader";
 import yusuphaJatta from "@/assets/members/member-yusupha-jatta.jpg";
 import emilGibba from "@/assets/members/member-emil-gibba.jpg";
 import alhagieJallow from "@/assets/members/member-alhagie-jallow.jpg";
-import sophieSissoho from "@/assets/members/member-sophie-sissoho.jpg";
 import fatouBoye from "@/assets/members/member-fatou-boye.jpg";
 import ebrimaSabally from "@/assets/members/member-ebrima-sabally.jpg";
 import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
@@ -45,13 +44,6 @@ const members: Member[] = [
     position: "Clerk",
     association: "Journalism Students' Association (JSA)",
     photo: alhagieJallow,
-    isOfficer: true,
-  },
-  {
-    name: "Hon. Sophie Sissoho",
-    position: "Deputy Clerk",
-    association: "Law Students' Association (LSA)",
-    photo: sophieSissoho,
     isOfficer: true,
   },
   {
@@ -137,7 +129,7 @@ const MembersPage = () => {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search members by name, role, or association..."
-            className="w-full rounded-xl border border-primary/20 bg-white/60 px-11 py-3 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:bg-white dark:bg-white/5"
+            className="w-full rounded-xl border border-primary/20 bg-white/60 px-11 py-3 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:bg-white"
           />
         </label>
       </div>
@@ -205,7 +197,7 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
   const showPhoto = Boolean(member.photo) && !photoFailed;
 
   return (
-    <div className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
+    <div className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20">
       <div className="gold-gradient p-1.5">
         {showPhoto ? (
           <img
