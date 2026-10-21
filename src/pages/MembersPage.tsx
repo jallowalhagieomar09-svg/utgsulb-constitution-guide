@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { UserCircle, Users } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Search, UserCircle, Users } from "lucide-react";
 import ChapterHeader from "@/components/ChapterHeader";
 
 import yusuphaJatta from "@/assets/members/member-yusupha-jatta.jpg";
@@ -99,8 +99,26 @@ const members: Member[] = [
 ];
 
 const MembersPage = () => {
-  const officers = members.filter((m) => m.isOfficer);
-  const representatives = members.filter((m) => !m.isOfficer);
+  const [search, setSearch] = useState("");
+
+  const filteredMembers = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    if (!query) {
+      return members;
+    }
+
+    return members.filter((member) => {
+      const searchableText = [member.name, member.position, member.association]
+        .join(" ")
+        .toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  }, [search]);
+
+  const officers = filteredMembers.filter((m) => m.isOfficer);
+  const representatives = filteredMembers.filter((m) => !m.isOfficer);
 
   return (
     <div>
@@ -109,6 +127,20 @@ const MembersPage = () => {
         title="Members of the 7th Legislative Body"
         description="The elected representatives of the 2024/2025 academic year"
       />
+
+      <div className="mb-6">
+        <label className="relative block">
+          <span className="sr-only">Search members</span>
+          <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/70" />
+          <input
+            type="text"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search members by name, role, or association..."
+            className="w-full rounded-xl border border-primary/20 bg-white/60 px-11 py-3 text-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:bg-white dark:bg-white/5"
+          />
+        </label>
+      </div>
 
       <div className="mb-8 p-4 bg-secondary/50 border-l-4 border-primary rounded-r-lg">
         <p className="text-sm text-foreground/80 leading-relaxed">
@@ -120,23 +152,33 @@ const MembersPage = () => {
         </p>
       </div>
 
-      <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-        <Users size={24} /> Presiding Officers
-      </h2>
-      <div className="grid gap-6 sm:grid-cols-2 mb-10">
-        {officers.map((member, i) => (
-          <MemberCard key={i} member={member} />
-        ))}
-      </div>
+      {officers.length === 0 && representatives.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-primary/30 bg-secondary/40 p-6 text-center">
+          <p className="text-base font-medium text-foreground">
+            No members match “{search}”
+          </p>
+        </div>
+      ) : (
+        <>
+          <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+            <Users size={24} /> Presiding Officers
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 mb-10">
+            {officers.map((member) => (
+              <MemberCard key={member.name} member={member} />
+            ))}
+          </div>
 
-      <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-        <Users size={24} /> Association Representatives
-      </h2>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {representatives.map((member, i) => (
-          <MemberCard key={i} member={member} compact />
-        ))}
-      </div>
+          <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+            <Users size={24} /> Association Representatives
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {representatives.map((member) => (
+              <MemberCard key={member.name} member={member} compact />
+            ))}
+          </div>
+        </>
+      )}
 
       <div className="mt-10 p-4 bg-secondary/50 border-l-4 border-primary rounded-r-lg">
         <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
@@ -163,9 +205,7 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
   const showPhoto = Boolean(member.photo) && !photoFailed;
 
   return (
-    <div
-      className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-primary/20 hover:-translate-y-0.5"
-    >
+    <div className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20">
       <div className="gold-gradient p-1.5">
         {showPhoto ? (
           <img
