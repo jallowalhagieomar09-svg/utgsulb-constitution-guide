@@ -11,7 +11,7 @@ import fodayMinteh from "@/assets/members/member-foday-minteh.jpg";
 import ramatoulieJitteh from "@/assets/members/member-ramatoulie-jitteh.jpg";
 import aimanBadjan from "@/assets/members/member-aiman-badjan.jpg";
 import kawsuManneh from "@/assets/members/member-kawsu-manneh.jpg.asset.json";
-import ebouSowe from "@/assets/members/member-ebou-sowe.jpeg";
+import ebouSowe from "@/assets/members/src-assets-members-member-ebou-sowe.jpg.jpeg";
 
 interface Member {
   name: string;
@@ -116,7 +116,6 @@ const MembersPage = () => {
         </p>
       </div>
 
-      {/* Presiding Officers */}
       <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
         <Users size={24} /> Presiding Officers
       </h2>
@@ -126,7 +125,6 @@ const MembersPage = () => {
         ))}
       </div>
 
-      {/* Representatives */}
       <h2 className="font-heading text-2xl font-bold text-primary mb-4 flex items-center gap-2">
         <Users size={24} /> Association Representatives
       </h2>
@@ -159,9 +157,8 @@ interface MemberCardProps {
 const MemberCard = ({ member, compact }: MemberCardProps) => {
   return (
     <div
-      className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40"
+      className="group flex flex-col rounded-2xl overflow-hidden border border-white/30 bg-white/40 dark:bg-white/5 backdrop-blur-xl shadow-lg shadow-primary/10 transition-all duration-300 hover:shadow-primary/20 hover:-translate-y-0.5"
     >
-      {/* Photo with golden gradient border frame */}
       <div className="gold-gradient p-1.5">
         <img
           src={member.photo}
@@ -169,7 +166,6 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
           className={`w-full rounded-xl ${compact ? "h-56" : "h-72"} object-cover object-top`}
         />
       </div>
-      {/* Position badge overlay */}
       <div className="relative">
         {member.isOfficer ? (
           <span className="absolute -top-9 right-3 bg-white/70 dark:bg-black/50 backdrop-blur-md text-primary border border-primary/30 text-xs font-semibold px-3 py-1 rounded-full shadow whitespace-nowrap">
@@ -180,7 +176,6 @@ const MemberCard = ({ member, compact }: MemberCardProps) => {
             Representative
           </span>
         )}
-        {/* Golden gradient name plate */}
         <div className="gold-gradient px-5 py-4 text-center">
           <h3 className="font-heading font-semibold text-primary-foreground group-hover:brightness-110 transition-all">
             {member.name}
