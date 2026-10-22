@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText, UserCircle, Sparkles } from "lucide-react";
+import { BookOpen, Scale, Users, Vote, Landmark, Banknote, Award, Mail, Phone, FileText, UserCircle, Sparkles, Download } from "lucide-react";
 import suLogo from "@/assets/su-logo.jpg";
 import slbLogo from "@/assets/slb-logo.jpg";
 
@@ -17,6 +17,8 @@ const chapters = [
   { path: "/members", title: "7th Legislative Body Members", desc: "Meet the Speaker, Deputy Speaker, Clerk, Deputy Clerk, and association representatives of the 7th Legislature.", icon: UserCircle },
   { path: "/bills", title: "Ongoing Bills", desc: "Active amendment bills before the Legislative Body and their current legislative stage.", icon: FileText },
 ];
+
+const constitutionPdfUrl = "https://drive.google.com/uc?export=download&id=1yRScgeNstW8TtwWII7VvBBCYK1tlVr2r";
 
 const HomePage = () => {
   return (
@@ -42,6 +44,18 @@ const HomePage = () => {
           </p>
           <div className="flex justify-center gap-3 mt-4 text-sm text-muted-foreground">
             <span className="font-heading italic">"Solidarity • Dedication • Service"</span>
+          </div>
+
+          <div className="mt-6 flex justify-center">
+            <a
+              href={constitutionPdfUrl}
+              download="UTGSU-Constitution-2021.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 gold-gradient text-primary-foreground px-5 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-opacity shadow-md"
+            >
+              <Download size={16} /> Download Constitution PDF
+            </a>
           </div>
         </div>
       </div>
