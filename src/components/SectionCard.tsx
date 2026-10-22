@@ -1,10 +1,13 @@
 interface SectionCardProps {
   title: string;
   provisions: string[];
-  interpretation: string;
+  interpretation?: string;
+  explanation?: string;
 }
 
-const SectionCard = ({ title, provisions, interpretation }: SectionCardProps) => {
+const SectionCard = ({ title, provisions, interpretation, explanation }: SectionCardProps) => {
+  const explanationText = explanation ?? interpretation ?? "";
+
   return (
     <div className="section-card mb-6 animate-fade-in">
       <h3 className="section-title">{title}</h3>
@@ -15,12 +18,15 @@ const SectionCard = ({ title, provisions, interpretation }: SectionCardProps) =>
           </p>
         ))}
       </div>
-      <div className="interpretation-box">
-        <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
-          📖 Interpretation & Explanation
-        </p>
-        <p className="text-sm text-foreground/80 leading-relaxed">{interpretation}</p>
-      </div>
+
+      {explanationText && (
+        <div className="interpretation-box">
+          <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
+            📖 Explanation
+          </p>
+          <p className="text-sm text-foreground/80 leading-relaxed">{explanationText}</p>
+        </div>
+      )}
     </div>
   );
 };
