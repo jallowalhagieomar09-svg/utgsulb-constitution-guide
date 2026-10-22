@@ -5,9 +5,7 @@ interface SectionCardProps {
   explanation?: string;
 }
 
-const SectionCard = ({ title, provisions, interpretation, explanation }: SectionCardProps) => {
-  const explanationText = explanation ?? interpretation ?? "";
-
+const SectionCard = ({ title, provisions }: SectionCardProps) => {
   return (
     <div className="section-card mb-6 animate-fade-in">
       <h3 className="section-title">{title}</h3>
@@ -18,15 +16,6 @@ const SectionCard = ({ title, provisions, interpretation, explanation }: Section
           </p>
         ))}
       </div>
-
-      {explanationText && (
-        <div className="interpretation-box">
-          <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-1">
-            📖 Explanation
-          </p>
-          <p className="text-sm text-foreground/80 leading-relaxed">{explanationText}</p>
-        </div>
-      )}
     </div>
   );
 };
